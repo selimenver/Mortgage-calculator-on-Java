@@ -1,12 +1,13 @@
 package main;
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-class Main{
+class Main {
 
-    public static void main(String[] args){
-        final int Months_in_year = 12;
-        final int percentage = 100;
+    static double Calculator() {
+        final int MONTHS_IN_YEAR = 12;
+        final int PERCENTAGE = 100;
 
         Scanner reader = new Scanner(System.in);
 
@@ -16,18 +17,23 @@ class Main{
         System.out.println("Annual Interest rate: ");
         float annualInterest = reader.nextFloat();
 
-        float monthlyInterest = annualInterest/ percentage/Months_in_year;
+        double monthlyInterest = annualInterest / PERCENTAGE / MONTHS_IN_YEAR;
 
         System.out.println("Period (years): ");
         int years = reader.nextInt();
 
-        int numberOfPayments = years * Months_in_year;
+        int numberOfPayments = years * MONTHS_IN_YEAR;
 
         double mortgage = principal *
                 (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
                 / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
 
+        return mortgage;
+    }
 
-        System.out.println(new DecimalFormat("$#.00").format(mortgage));
+    public static void main(String[] args) {
+        double mortgage = Calculator();
+        System.out.println("Your monthly mortgage is: " +
+                new DecimalFormat("$#.00").format(mortgage));
     }
 }
